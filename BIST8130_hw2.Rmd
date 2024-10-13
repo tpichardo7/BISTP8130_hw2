@@ -1,0 +1,5 @@
+---
+title: "BIST8130_hw2"
+output: github_document
+---
+
