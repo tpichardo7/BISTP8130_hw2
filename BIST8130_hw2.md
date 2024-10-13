@@ -48,7 +48,7 @@ have at least one dental checkup?
 
 ``` r
 #calculating the standard deviation of individuals who will have at least one dental checkup
-sd_e = sqrt(n * p * q_1)
+sd_1e = sqrt(n * p * q_1)
 ```
 
 The standard deviation of the number of individuals who will have at
@@ -107,3 +107,77 @@ P_greater_3 = 1 - ppois(q_2c, lambda)
 
 The probability of having more than 3 tornadoes in the United States is
 0.8487961.
+
+# Question 3
+
+## Part a
+
+What is the probability that a randomly selected American male between
+20 and 29 years old has a systolic blood pressure above 137.0?
+
+``` r
+#parameters for population mean, population standard deviation, and systolic blood pressure threshold
+mean_3 = 128.0
+sd_3 = 10.2
+sbp_3a = 137.0
+```
+
+``` r
+#calculating the probability of systolic blood pressure > 137.0
+P_above_137 = 1 - pnorm(sbp_3a, mean_3, sd_3)
+```
+
+The probability that a randomly selected American male between 20 and 29
+years old has a systolic blood pressure above 137.0 is 0.188793.
+
+## Part b
+
+What is the probability that the sample mean for blood pressure of 50
+males between 20 and 29 years old will be less than 125.0?
+
+``` r
+#sample size and sample mean
+n_3b = 50
+smean_3b = 125.0
+```
+
+``` r
+#calculating standard error of the mean
+se_3b = sd_3 / sqrt(n_3b)
+```
+
+``` r
+#calculating z-score
+zscore_3b = (smean_3b - mean_3) / se_3b
+```
+
+``` r
+#calculating the probability of sample mean < 125.0
+P_smean_less_125 = pnorm(zscore_3b)
+```
+
+The probability that the sample mean for blood pressure of 50 males
+between 20 and 29 years old will be less than 125.0 is 0.0187753.
+
+## Part c
+
+What is the 90th percentile of the sampling distribution of the sample
+mean X for a sample size of 40?
+
+``` r
+#sample size
+n_3c = 40
+```
+
+``` r
+#calculating standard error of the mean
+se_3c = sd_3 / sqrt(n_3c)
+```
+
+``` r
+#calculating the 90th percentile
+percentile_90 = qnorm(0.90, mean_3, se_3c)
+```
+
+The 90th percentile of the sampling distribution of the sample size mean
+X for a sample size of 40 is 130.0668372.
