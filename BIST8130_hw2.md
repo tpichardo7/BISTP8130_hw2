@@ -10,14 +10,14 @@ at least one dental checkup?
 
 ``` r
 #assigning variables for number of trials, probability of success, and probability of failure
-n = 56
-p = 0.73
+n_1 = 56
+p_1 = 0.73
 q_1 = 0.27
 ```
 
 ``` r
 #probability of x less than 40, P(X < 40)
-P_X_less_40 = pbinom(39, n, p)
+P_X_less_40 = pbinom(39, n_1, p_1)
 ```
 
 ``` r
@@ -28,13 +28,37 @@ P_X_ge_40 = 1 - P_X_less_40
 The probability that at least 40 of these individuals will have at least
 one dental checkup is 0.6678734.
 
+## Part c
+
+``` r
+#calculating mean and standard deviation for normal approximation
+mean_1 = n_1 * p_1
+sd_1c = sqrt (n_1 * p_1 * q_1)
+```
+
+``` r
+#z-scores for continuity correction
+z_39.5 = (39.5 - mean_1) / sd_1c
+z_40.5 = (40.5 - mean_1) / sd_1c
+```
+
+``` r
+#approximation for exactly 40 individuals that will have at least one dental checkup
+P_X_40_approx = pnorm(z_40.5) - pnorm(z_39.5)
+```
+
+``` r
+#appriximation for at least 40 individuals that will have at least one dental
+P_X_ge40_approx = 1 - pnorm(z_39.5)
+```
+
 ## Part d
 
 How many individuals do you expect to have at least one dental checkup?
 
 ``` r
 #calculating the number of individuals expected to have at least one dental checkup
-expected_number = n * p
+expected_number = n_1 * p_1
 expected_rounded = floor(expected_number)
 ```
 
@@ -48,7 +72,7 @@ have at least one dental checkup?
 
 ``` r
 #calculating the standard deviation of individuals who will have at least one dental checkup
-sd_1e = sqrt(n * p * q_1)
+sd_1e = sqrt(n_1 * p_1 * q_1)
 ```
 
 The standard deviation of the number of individuals who will have at
@@ -181,3 +205,86 @@ percentile_90 = qnorm(0.90, mean_3, se_3c)
 
 The 90th percentile of the sampling distribution of the sample size mean
 X for a sample size of 40 is 130.0668372.
+
+# Question 4
+
+## Part a
+
+Compute the 95% confidence interval for the population mean pulse rate
+of young females suffering from fibromyalgia.
+
+``` r
+#given data
+n_4 = 40
+smean_4 = 80
+sd_4 = 10
+```
+
+``` r
+#calculating standard error of the mean
+se_4a = sd_4 / sqrt(n_4)
+```
+
+``` r
+#calculating the t-score for the 95% confidence interval
+alpha_4a = 0.05
+tscore_4a = qt(1 - alpha_4a / 2, df = n_4 - 1)
+```
+
+``` r
+#calculating margin of error
+margin_error_4a = tscore_4a * se_4a
+```
+
+``` r
+#calculating confidence interval
+CI_lower_4a = smean_4 - margin_error_4a
+CI_upper_4a = smean_4 + margin_error_4a
+```
+
+The 95% confidence interval for the population mean pulse rate of young
+females suffering from fibromyalgia is 76.8018448 to 83.1981552.
+
+## Part b
+
+We are 95% confident that the true population mean lies between the
+lower limit of 76.8018448 and the upper limit of 83.1981552 of the
+interval.
+
+## Part c
+
+Conduct the hypothesis testing and interpret the results.
+
+``` r
+#given data
+null_mean = 70
+alpha_4c = 0.01
+```
+
+``` r
+#calculating standard error
+se_4c = smean_4 / sqrt(n_4)
+```
+
+``` r
+#calculating t-statistic
+tstat_4c = (smean_4 - null_mean) / se_4c
+```
+
+``` r
+#calculating critical t-value
+tcritical = qt(1 - alpha_4c / 2, df = n_4 - 1)
+```
+
+``` r
+#calculating p-value
+pvalue_4c = 2 * (1 - pt(abs(tstat_4c), df = n_4 - 1))
+```
+
+The p-value is 0.4339766.
+
+Since the p-value of 0.4339766 is greater than the 0.01 significance
+level, we do not reject the null hypothesis as this indicates weak
+evidence against the null. The p-value indicates that the data would
+occur 43.40% of the time if the null is true, so not enough evidence to
+reject.
