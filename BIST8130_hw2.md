@@ -147,8 +147,12 @@ sbp_3a = 137.0
 ```
 
 ``` r
+z_3a = (sbp_3a - mean_3) / sd_3
+```
+
+``` r
 #calculating the probability of systolic blood pressure > 137.0
-P_above_137 = 1 - pnorm(sbp_3a, mean_3, sd_3)
+P_above_137 = 1 - pnorm(z_3a)
 ```
 
 The probability that a randomly selected American male between 20 and 29
@@ -263,7 +267,7 @@ alpha_4c = 0.01
 
 ``` r
 #calculating standard error
-se_4c = smean_4 / sqrt(n_4)
+se_4c = sd_4 / sqrt(n_4)
 ```
 
 ``` r
@@ -281,10 +285,10 @@ tcritical = qt(1 - alpha_4c / 2, df = n_4 - 1)
 pvalue_4c = 2 * (1 - pt(abs(tstat_4c), df = n_4 - 1))
 ```
 
-The p-value is 0.4339766.
+The p-value is 1.8350062^{-7}.
 
-Since the p-value of 0.4339766 is greater than the 0.01 significance
-level, we do not reject the null hypothesis as this indicates weak
-evidence against the null. The p-value indicates that the data would
-occur 43.40% of the time if the null is true, so not enough evidence to
-reject.
+Since the p-value of 1.8350062^{-7} is greater than the 0.01
+significance level, we do not reject the null hypothesis as this
+indicates weak evidence against the null. The p-value indicates that the
+data would occur 43.40% of the time if the null is true, so not enough
+evidence to reject.
